@@ -24,7 +24,7 @@ public class Plant {
     @Column(precision=12, scale=4)
     private BigDecimal price; // BigDecimal is the standard Java class for currency math
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)  //many plants can be in one delivery
     @JoinColumn(name = "delivery_id")  //map the join column in the plant table
     private Delivery delivery;
 
