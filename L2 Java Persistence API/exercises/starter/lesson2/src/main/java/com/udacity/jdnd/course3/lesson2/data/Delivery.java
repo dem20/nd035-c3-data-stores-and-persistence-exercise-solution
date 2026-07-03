@@ -6,9 +6,14 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@NamedQuery(
+name = "Delivery.findByName",
+query = "SELECT d FROM Delivery d WHERE d.name = :name"
+)
 @Entity
 public class Delivery {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Nationalized
@@ -23,7 +28,7 @@ public class Delivery {
     // but often a good idea for collection attributes
     @OneToMany(fetch = FetchType.LAZY,
          mappedBy = "delivery",
-        cascade = CascadeType.REMOVE,
+        cascade = CascadeType.ALL,
         orphanRemoval = true)
     private List<Plant> plants;
 
